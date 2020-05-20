@@ -1,26 +1,33 @@
 #include<iostream>
+#include<string.h>
 #include<algorithm>
 using namespace std;
 
-int n,a[1005];
+int n;
+pair<int,int> a[1005];
+int check[1005];
 
 void result()
 {
-    int b[1005],c[100005],cnt=0;
-    for (int i=0;i<n;i++)
-        b[i]=a[i];
-    sort(b,b+n);
-    for (int i=0;i<n;i++)
-        c[b[i]]=i;
+    memset(check,0,sizeof(check));
+    int cnt=0;
+    sort(a,a+n);
     for (int i=0;i<n;i++)
     {
-        if (a[i]!=b[i])
+        if (check[i]==0 && a[i].second !=i)
         {
-            swap(a[i],a[c[a[i]]]);
-            cnt++;
+            int temp=0,j=i;
+            while (check[j]==0)
+            {
+                check[j]=1;
+                j = a[j].second;
+                temp++;
+            }
+            if (temp > 0)
+                cnt +=(temp-1);
         }
     }
-    cout << cnt << endl;
+    cout << cnt;
 }
 
 int main()
@@ -31,8 +38,12 @@ int main()
     {
         cin >> n;
         for (int i=0;i<n;i++)
-            cin >> a[i];
+        {
+            cin >> a[i].first;
+            a[i].second = i;
+        }
         result();
+        cout << endl;
     }
     return 0;
 }

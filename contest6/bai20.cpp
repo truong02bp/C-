@@ -2,29 +2,19 @@
 #include<algorithm>
 using namespace std;
 
-int n,k,a[100005],cnt=0,index;
-
-void find(int a[] , int l , int r)
-{
-    if (l > r)
-        return;
-    int mid = (l+r)/2;
-    if ((abs(a[mid]-a[index]) < k) && index!=mid)
-        cnt++;
-    find(a,l,mid-1);
-    find(a,mid+1,r);
-}
+int n,k,a[100005],index;
 
 void result()
 {
-    cnt = 0;
+    long long cnt = 0;
     sort(a,a+n);
     for (int i=0;i<n;i++)
     {
         index = i;
-        find(a,0,n-1);
+        int last = lower_bound(a+i,a+n,a[i]+k)-a-1;
+        cnt+= last-index;
     }
-    cout << cnt/2 << endl;
+    cout << cnt << endl;
 }
 
 int main()
