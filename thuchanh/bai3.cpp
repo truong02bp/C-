@@ -39,5 +39,7 @@ int main()
         }
         for (int i=0;i<rs.size();i++)
             cout << rs[i] <<" ";
+        cout << endl;
     }
+    return 0;
 }
