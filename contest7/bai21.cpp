@@ -3,26 +3,41 @@
 #include<vector>
 using namespace std;
 
-int n,a[100005];
+int n,a[1000005],smaller[1000005];
 
 void result()
 {
-    stack<int> sta,sta2;
-    vector<int> temp,rs;
-    sta.push(n-1);
-    sta2.push(n-1);
-    temp.push_back(-1);
+    stack<int> sta;
+    vector<int> rs;
+    sta.push(a[n-1]);
+    smaller[a[n-1]]=-1;
+    for (int i=n-2;i>=0;i--)
+    {
+        while (!sta.empty() && a[i] <= sta.top())
+            sta.pop();
+        if (sta.empty())
+            smaller[a[i]]=-1;
+        else 
+            smaller[a[i]]=sta.top();
+        sta.push(a[i]);
+    }
+    while (!sta.empty())
+        sta.pop();
+    sta.push(a[n-1]);
     rs.push_back(-1);
     for (int i=n-2;i>=0;i--)
     {
-        while (!sta.empty() && a[i] >= a[sta.top()])
+        while (!sta.empty() && a[i] >= sta.top())
             sta.pop();
         if (sta.empty())
-            temp.push_back(-1);
+            rs.push_back(-1);
         else 
-            temp.push_back(sta.top());
-        sta.push(i);
+            rs.push_back(smaller[sta.top()]);
+        sta.push(a[i]);
     }
+    for (int i=rs.size()-1;i>=0;i--)
+        cout << rs[i] <<" ";
+    cout << endl;
 }
 
 int main()
