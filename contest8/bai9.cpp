@@ -1,40 +1,32 @@
 #include<iostream>
 #include<queue>
-#include<set>
 using namespace std;
 
 int s,t;
 
 int result()
 {
-    set<int> check;
-    pair<int,int> temp;
-    queue<pair<int,int> > a;
-    check.insert(s);
-    temp.first = s;
-    temp.second = 0;
-    a.push(temp);
+    int cnt[20005];
+    for (int i=1;i<=20005;i++)
+        cnt[i] = 99999;
+    queue<int> a;
+    cnt[s]=0;
+    a.push(s);
     while (!a.empty())
     {
-        pair<int,int> temp = a.front();
+        int temp = a.front();
         a.pop();
-        if (temp.first-1 == t || 2*temp.first==t)
-            return temp.second+1;
-        if (check.find(temp.first-1) == check.end() && temp.first > 0)
+        if (temp-1==t || 2*temp==t)
+            return cnt[temp]+1;
+        if (cnt[temp-1] == 99999)
         {
-            pair<int,int> tmp;
-            check.insert(temp.first);
-            tmp.first = temp.first-1;
-            tmp.second = temp.second+1;
-            a.push(tmp);
+            cnt[temp-1] = cnt[temp] + 1;
+            a.push(temp-1);
         }
-        if (check.find(2*temp.first) == check.end())
+        if (cnt[2*temp] ==99999)
         {
-            pair<int,int> tmp;
-            check.insert(temp.first);
-            tmp.first = 2*temp.first;
-            tmp.second = temp.second+1;
-            a.push(tmp);
+            cnt[2*temp] = cnt[temp]+1;
+            a.push(2*temp);
         }
     }
 }
