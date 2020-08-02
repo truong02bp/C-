@@ -2,28 +2,32 @@
 #include<algorithm>
 using namespace std;
 
-int n,s,a[50],rs,kt,cnt;
+int n,s,a[50],rs,kt,tong;
 bool check[50];
-void Try()
+void Try(int k)
 {
-    if (s < 0 || cnt >= rs)
+    if (s < 0)
         return ;
-    for (int i=n-1;i>=0;i--)
+    if (k >= rs)
+        return ;    
+    if (s > tong)
+        return ;    
+    for (int i=0;i<n;i++)
         if (check[i]==false)
         {
             check[i] = true;
             s-=a[i];
-            cnt++;
+            tong-=a[i];
             if (s == 0)
             {
                 kt = 1;
-                rs = min(rs,cnt);
+                rs = min(rs,k);
             }
             else 
-                Try();
+                Try(k+1);
             s+=a[i];
-            check[i]=false;
-            cnt--;    
+            tong+=a[i];
+            check[i]=false;    
         }
 }
 
@@ -33,19 +37,20 @@ int main()
     cin >> t;
     while (t--)
     {
+        tong=0;
         cin >> n >> s;
         for (int i=0;i<n;i++)
         {
             cin >> a[i];
+            tong+=a[i];
             check[i] = false;
         }
-        sort(a,a+n);
-        rs = n , kt=0 , cnt = 0;
-        Try();
+        rs = n , kt=0;
+        Try(1);
         if (kt==0)
             cout << -1 << endl;
         else 
             cout << rs << endl;    
-    }
+}
     return 0;
 }
