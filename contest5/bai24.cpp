@@ -3,10 +3,10 @@
 using namespace std;
 
 int n,m;
-
+typedef long long ll;
 void result()
 {
-    int f[100][100];
+    ll f[100][100];
     f[0][1]=0;
     f[1][0]=0;
     f[1][1]=0;

@@ -5,7 +5,7 @@ int n, a[1005],f[1005];
 
 void result()
 {
-    int rs=0;
+    int rs=1;
     for (int i=0;i<n;i++)
     {
         f[i]=1;

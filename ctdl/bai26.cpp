@@ -8,7 +8,7 @@ int find(int i)
 {
     int rs = i;
     for (int j=i+1;j<s.length();j++)
-        if (s[j] > s[rs])
+        if (s[j] >= s[rs])
             rs = j;
     return rs;        
 }
@@ -29,7 +29,7 @@ void Try(int i)
     }
     int t,index;
     index = find(i);
-    if (index != i)
+    if (s[index] > s[i])
     {
         char t = s[index];
         s[index] = s[i];

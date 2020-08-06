@@ -4,10 +4,10 @@
 using namespace std;
 
 int n,a[1005],k,cnt,index;
-void find(int a[] , int l , int r , int k)
+int find(int a[] , int l , int r , int k)
 {
     if (l > r)
-        return ;
+        return -1;
     int mid = (l+r)/2;
     if (a[mid]==k && mid!=index)
         cnt++;
@@ -27,7 +27,9 @@ void result()
         {
             index = i;
             if (k>=a[i])
-                find(a,1,n,k-a[i]);
+            {
+                int t = find(a,1,n,k-a[i]);
+            }
         }
         cout << cnt/2 << endl;
     }

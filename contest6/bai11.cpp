@@ -6,7 +6,7 @@ int n,a[10005];
 
 void result()
 {
-    int rs =-999999999;
+    int rs =-99999999;
     for (int i=0;i<n-1;i++)
         for (int j=i+1;j<n;j++)
             if (abs(rs-0) > abs(a[i]+a[j]-0))

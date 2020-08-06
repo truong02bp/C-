@@ -31,7 +31,7 @@ void result()
             cnt++;
         sta.pop();
     } 
-    rs= rs/2 + cnt%2;
+    rs = rs/2 + cnt%2;
     cout << rs << endl;
 }
 
