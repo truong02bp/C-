@@ -1,55 +1,58 @@
-#include<iostream>
-#include<stack>
-#include<vector>
+#include<bits/stdc++.h>
 using namespace std;
 
-int n,a[1000005],smaller[1000005];
+typedef long long ll;
 
-void result()
+int n;
+ll a[100005],b[100005],temp[100005];
+
+void solve()
 {
-    stack<int> sta;
-    vector<int> rs;
-    sta.push(a[n-1]);
-    smaller[a[n-1]]=-1;
+    stack<int> s,s2;
+    b[n-1]=-1;
+    s.push(a[n-1]);
     for (int i=n-2;i>=0;i--)
     {
-        while (!sta.empty() && a[i] <= sta.top())
-            sta.pop();
-        if (sta.empty())
-            smaller[a[i]]=-1;
+        while (!s.empty() && a[i] >= s.top())
+        {
+            s.pop();
+        }
+        if (s.empty())
+            b[i]=-1;
         else 
-            smaller[a[i]]=sta.top();
-        sta.push(a[i]);
+            b[i]=s.top();
+        s.push(a[i]);        
     }
-    while (!sta.empty())
-        sta.pop();
-    sta.push(a[n-1]);
-    rs.push_back(-1);
-    for (int i=n-2;i>=0;i--)
+    s2.push(a[n-1]);
+    temp[a[n-1]]=-1;
+    for(int i=n-2;i>=0;i--)
     {
-        while (!sta.empty() && a[i] >= sta.top())
-            sta.pop();
-        if (sta.empty())
-            rs.push_back(-1);
+        while (!s2.empty() && a[i] <= s2.top())
+            s2.pop();
+        if (s2.empty())
+            temp[a[i]]=-1;
         else 
-            rs.push_back(smaller[sta.top()]);
-        sta.push(a[i]);
+            temp[a[i]]=s2.top();
+        s2.push(a[i]);            
     }
-    for (int i=rs.size()-1;i>=0;i--)
-        cout << rs[i] <<" ";
-    cout << endl;
+    for (int i=0;i<n;i++)
+        if (b[i]==-1)
+            cout << -1 <<" ";
+        else    
+            cout << temp[b[i]]<<" ";
+    cout << endl;       
 }
 
 int main()
 {
     int t;
     cin >> t;
-    while (t--)
+    while(t--)
     {
         cin >> n;
         for (int i=0;i<n;i++)
             cin >> a[i];
-        result();
+        solve();    
     }
     return 0;
 }

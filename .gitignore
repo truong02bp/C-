@@ -1,4 +1,6 @@
-c++
-pc2
-*.exe
-*.out
+# Ignore all
+*
+# Unignore all with extensions
+!*.*
+# Unignore all dirs
+!*/

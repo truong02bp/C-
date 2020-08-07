@@ -1,16 +1,12 @@
-#include<iostream>
-#include<stack>
+#include<bits/stdc++.h>
 using namespace std;
 
 string s;
-
-void result()
+void solve()
 {
     stack<int> sta;
-    int cnt=0;
     for (int i=0;i<=s.length();i++)
-    {
-        if (s[i]=='I' || i==s.length())
+        if(s[i]=='I' || i==s.length())
         {
             cout << i+1;
             while(!sta.empty())
@@ -21,18 +17,16 @@ void result()
         }
         else 
             sta.push(i+1);
-    }
-    cout << endl;
+    cout << endl;        
 }
-
 int main()
 {
     int t;
     cin >> t;
-    while (t--)
+    while(t--)
     {
         cin >> s;
-        result();
+        solve();
     }
     return 0;
 }
