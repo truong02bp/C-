@@ -61,8 +61,6 @@ int main()
             vao[y].push_back(x);
             ra[x].push_back(y);
         }
-        for (int i=1;i<=v;i++)
-            sort(a[i].begin(),a[i].end());
         cout << result() << endl;
     }
     return 0;

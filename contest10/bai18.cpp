@@ -26,7 +26,7 @@ void result()
         q.pop();
         if (s==n)
         {
-            cout << d[n] <<" " << f[n];
+            cout << d[n] <<" " << f[n] << endl;
             return;
         }
         for (int i=0;i<a[s].size();i++)
